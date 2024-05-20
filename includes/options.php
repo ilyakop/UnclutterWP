@@ -1,14 +1,18 @@
 <?php
 
+namespace UnclutterWP\Options;
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class UnclutterWP_Options
+use UnclutterWP;
+
+class UNCLT_Options
 {
-    private $options_page_slug = 'unclutterwp-settings';
-    private $settings_group = 'unclutterwp_settings';
-    private $prefix = 'unclutterwp';
+    private $prefix = UnclutterWP\UNCLT_PREFIX;
+    private $options_page_slug = 'unclt-settings-page';
+    private $settings_group = 'unclt_settings_group';
 
     public function __construct()
     {
@@ -19,7 +23,7 @@ class UnclutterWP_Options
     public function add_options_page()
     {
         add_options_page(
-            'UnclutterWP Settings',
+            __('UnclutterWP Settings', 'unclutterwp'),
             'UnclutterWP',
             'manage_options',
             $this->options_page_slug,
@@ -29,10 +33,10 @@ class UnclutterWP_Options
 
     public function register_settings()
     {
-        register_setting($this->settings_group, $this->prefix . '_settings', array($this, 'sanitize_settings'));
+        register_setting($this->settings_group, $this->prefix . 'settings', array($this, 'sanitize_settings'));
 
         // Add settings sections
-        add_settings_section('general_section', 'General Settings', array($this, 'render_general_section'), $this->options_page_slug);
+        add_settings_section('general_section',  __('General Settings', 'unclutterwp'), array($this, 'render_general_section'), $this->options_page_slug);
 
         // Add settings for each method
         $this->add_checkbox_setting(
@@ -98,12 +102,12 @@ class UnclutterWP_Options
     private function add_checkbox_setting($id, $label, $description)
     {
         add_settings_field(
-            $this->prefix . '_' . $id,
+            $id,
             $label,
             array($this, 'render_checkbox_field'),
             $this->options_page_slug,
             'general_section',
-            array('id' => $this->prefix . '_' . $id, 'label' => $label, 'description' => $description)
+            array('id' => $id, 'label' => $label, 'description' => $description)
         );
     }
 
@@ -130,11 +134,11 @@ class UnclutterWP_Options
 
     public function render_checkbox_field($args)
     {
-        $value = get_option($this->prefix . '_settings', array());
+        $value = get_option($this->prefix . 'settings', array());
         $checked = isset($value[$args['id']]) ? checked(1, $value[$args['id']], false) : '';
     ?>
         <label for="<?php echo esc_attr($args['id']); ?>">
-            <input type="checkbox" id="<?php echo esc_attr($args['id']); ?>" name="<?php echo esc_attr($this->prefix . '_settings'); ?>[<?php echo esc_attr($args['id']); ?>]" value="1" <?php echo $checked; ?>>
+            <input type="checkbox" id="<?php echo esc_attr($args['id']); ?>" name="<?php echo esc_attr($this->prefix . 'settings'); ?>[<?php echo esc_attr($args['id']); ?>]" value="1" <?php echo $checked; ?>>
             <span class="description"><?php echo esc_html($args['description']); ?></span>
         </label>
 <?php
@@ -150,4 +154,4 @@ class UnclutterWP_Options
     }
 }
 
-new UnclutterWP_Options();
+new UNCLT_Options();

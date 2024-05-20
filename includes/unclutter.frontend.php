@@ -1,51 +1,61 @@
 <?php
 
-class UnclutterWP_Frontend
+namespace UnclutterWP\Frontend;
+
+use UnclutterWP\Options\UNCLT_Options as UNCLT_Options;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+use UnclutterWP;
+
+class UNCLT_Frontend
 {
-    private $prefix = 'unclutterwp';
+    private $prefix = UnclutterWP\UNCLT_PREFIX;
 
     public function __construct()
     {
 
-        $options = get_option($this->prefix . '_settings', array());
+        $options = get_option($this->prefix . 'settings', array());
 
-        if (!empty($options[$this->prefix . '_clean_head'])) {
+        if (!empty($options['clean_head'])) {
             $this->clean_head();
         }
 
-        if (!empty($options[$this->prefix . '_disable_json_api'])) {
+        if (!empty($options['disable_json_api'])) {
             $this->remove_json_api();
         }
 
-        if (!empty($options[$this->prefix . '_disable_rest_api'])) {
+        if (!empty($options['disable_rest_api'])) {
             $this->disable_rest_api();
         }
 
-        if (!empty($options[$this->prefix . '_disable_emojis'])) {
+        if (!empty($options['disable_emojis'])) {
             $this->disable_emojis();
         }
 
-        if (!empty($options[$this->prefix . '_disable_embeds'])) {
+        if (!empty($options['disable_embeds'])) {
             $this->disable_embeds();
         }
 
-        if (!empty($options[$this->prefix . '_remove_translations'])) {
+        if (!empty($options['remove_translations'])) {
             $this->remove_translations();
         }
 
-        if (!empty($options[$this->prefix . '_disable_trackbacks'])) {
+        if (!empty($options['disable_trackbacks'])) {
             $this->disable_trackbacks();
         }
 
-        if (!empty($options[$this->prefix . '_disable_pingback'])) {
+        if (!empty($options['disable_pingback'])) {
             $this->disable_pingback();
         }
 
-        if (!empty($options[$this->prefix . '_remove_wptexturize'])) {
+        if (!empty($options['remove_wptexturize'])) {
             $this->remove_wptexturize();
         }
 
-        if (!empty($options[$this->prefix . '_remove_xmlrpc'])) {
+        if (!empty($options['remove_xmlrpc'])) {
             $this->remove_xmlrpc();
         }
 
@@ -238,12 +248,7 @@ class UnclutterWP_Frontend
      */
     public function disable_embeds()
     {
-        function deregister_embed_scripts()
-        {
-            wp_dequeue_script('wp-embed');
-            wp_deregister_script('wp-embed');
-        }
-        add_action('wp_print_scripts', 'deregister_embed_scripts');
+        add_action('wp_print_scripts', array($this, 'deregister_embed_scripts'));
         // Remove some oEmbed features - they're slow!
         add_filter(
             'tiny_mce_plugins',
@@ -251,6 +256,18 @@ class UnclutterWP_Frontend
                 return array_diff($plugins, ['wpembed']);
             }
         );
+    }
+
+    /**
+     * Callback to derigister embeds
+     *
+     * @since 1.0.0
+     */
+
+    function deregister_embed_scripts()
+    {
+        wp_dequeue_script('wp-embed');
+        wp_deregister_script('wp-embed');
     }
 
     /**
@@ -303,4 +320,4 @@ class UnclutterWP_Frontend
     }
 }
 
-new UnclutterWP_Frontend();
+new UNCLT_Frontend();

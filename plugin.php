@@ -10,6 +10,10 @@
  * License: GPLv2 or later
  */
 
+namespace UnclutterWP;
+
+const UNCLT_PREFIX = 'unclt_';
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -17,7 +21,7 @@ if (!defined('ABSPATH')) {
 /** 
  * Main plugin class
  */
-class UnclutterWP
+class UNCLT_Main
 {
     /**
      * Constructor
@@ -56,4 +60,4 @@ class UnclutterWP
 }
 
 // Initialize the plugin
-new UnclutterWP();
+new UNCLT_Main();
