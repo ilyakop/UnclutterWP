@@ -129,7 +129,9 @@ class UNCLT_Options
 
     public function render_general_section()
     {
-        echo '<p>Configure general settings to unclutter your WordPress site.</p>';
+        echo '<p>';
+        _e('Configure general settings to unclutter your WordPress site.', 'your-text-domain');
+        echo '</p>';
     }
 
     public function render_checkbox_field($args)
