@@ -4,7 +4,7 @@
  * Plugin Name: UnclutterWP
  * Plugin URI: https://github.com/ilyakop/UnclutterWP
  * Description: UnclutterWP removes unnecessary clutter, optimizes performance, and keeps your site running smoothly.
- * Version: 0.1
+ * Version: 1.0
  * Author: Illia Online
  * Author URI: https://illia.online
  * License: GPLv2 or later
@@ -43,6 +43,9 @@ class UNCLT_Main
     {
         include_once plugin_dir_path(__FILE__) . 'includes/options.php';
         include_once plugin_dir_path(__FILE__) . 'includes/unclutter.frontend.php';
+        if (is_admin()) {
+            require_once plugin_dir_path(__FILE__) . 'includes/unclutter.admin.php';
+        }
     }
 
     /**

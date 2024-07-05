@@ -2,8 +2,6 @@
 
 namespace UnclutterWP\Frontend;
 
-use UnclutterWP\Options\UNCLT_Options as UNCLT_Options;
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -12,50 +10,50 @@ use UnclutterWP;
 
 class UNCLT_Frontend
 {
-    private $prefix = UnclutterWP\UNCLT_PREFIX;
 
     public function __construct()
     {
 
-        $options = get_option($this->prefix . 'settings', array());
+        global $UNCLT_Options;
+        $settings = $UNCLT_Options->get_all_settings();
 
-        if (!empty($options['clean_head'])) {
+        if (!empty($settings['clean_head'])) {
             $this->clean_head();
         }
 
-        if (!empty($options['disable_json_api'])) {
+        if (!empty($settings['disable_json_api'])) {
             $this->remove_json_api();
         }
 
-        if (!empty($options['disable_rest_api'])) {
+        if (!empty($settings['disable_rest_api'])) {
             $this->disable_rest_api();
         }
 
-        if (!empty($options['disable_emojis'])) {
+        if (!empty($settings['disable_emojis'])) {
             $this->disable_emojis();
         }
 
-        if (!empty($options['disable_embeds'])) {
+        if (!empty($settings['disable_embeds'])) {
             $this->disable_embeds();
         }
 
-        if (!empty($options['remove_translations'])) {
+        if (!empty($settings['remove_translations'])) {
             $this->remove_translations();
         }
 
-        if (!empty($options['disable_trackbacks'])) {
+        if (!empty($settings['disable_trackbacks'])) {
             $this->disable_trackbacks();
         }
 
-        if (!empty($options['disable_pingback'])) {
+        if (!empty($settings['disable_pingback'])) {
             $this->disable_pingback();
         }
 
-        if (!empty($options['remove_wptexturize'])) {
+        if (!empty($settings['remove_wptexturize'])) {
             $this->remove_wptexturize();
         }
 
-        if (!empty($options['remove_xmlrpc'])) {
+        if (!empty($settings['remove_xmlrpc'])) {
             $this->remove_xmlrpc();
         }
 
@@ -302,7 +300,7 @@ class UNCLT_Frontend
             'xmlrpc_call',
             function ($action) {
                 if ('pingback.ping' == $action) {
-                    wp_die(__('403 Permission Denied'), __('Permission Denied'), ['response' => 403]);
+                    wp_die(__('403 Permission Denied', 'unclutterwp'), __('Permission Denied', 'unclutterwp'), ['response' => 403]);
                 }
             }
         );

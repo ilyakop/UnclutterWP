@@ -36,77 +36,219 @@ class UNCLT_Options
         register_setting($this->settings_group, $this->prefix . 'settings', array($this, 'sanitize_settings'));
 
         // Add settings sections
-        add_settings_section('general_section',  __('General Settings', 'unclutterwp'), array($this, 'render_general_section'), $this->options_page_slug);
+        add_settings_section('general', __('Frontend Settings', 'unclutterwp'), array($this, 'render_frontend_section'), $this->options_page_slug . '_frontend');
+        add_settings_section('general', __('General Admin Settings', 'unclutterwp'), array($this, 'render_admin_general_section'), $this->options_page_slug . '_admin');
+        add_settings_section('widget', __('Remove Dashboard Widgets', 'unclutterwp'), array($this, 'render_admin_widget_section'), $this->options_page_slug . '_admin');
+        add_settings_section('menu', __('Remove Menu Items', 'unclutterwp'), array($this, 'render_admin_menu_section'), $this->options_page_slug . '_admin');
 
-        // Add settings for each method
+        // Add settings for Frontend methods
         $this->add_checkbox_setting(
             'clean_head',
             __('Clean Head', 'unclutterwp'),
-            __('Removes unnecessary elements from the <head> section.', 'unclutterwp')
+            __('Removes unnecessary elements from the <head> section.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_json_api',
             __('Disable JSON API', 'unclutterwp'),
-            __('Disables the JSON API, reducing potential security risks and server load.', 'unclutterwp')
+            __('Disables the JSON API, reducing potential security risks and server load.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_rest_api',
             __('Disable REST API', 'unclutterwp'),
-            __('Completely disables the REST API, improving security and reducing unnecessary requests.', 'unclutterwp')
+            __('Completely disables the REST API, improving security and reducing unnecessary requests.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_trackbacks',
             __('Disable Trackbacks', 'unclutterwp'),
-            __('Removes trackback functionality, which is often considered obsolete and can be a target for spam.', 'unclutterwp')
+            __('Removes trackback functionality, which is often considered obsolete and can be a target for spam.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_pingback',
             __('Disable Pingback', 'unclutterwp'),
-            __('Disables the XML-RPC pingback functionality, reducing the risk of DDoS attacks and improving security.', 'unclutterwp')
+            __('Disables the XML-RPC pingback functionality, reducing the risk of DDoS attacks and improving security.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_emojis',
             __('Disable Emojis', 'unclutterwp'),
-            __('Removes the emoji script and styles, reducing page load times and improving performance.', 'unclutterwp')
+            __('Removes the emoji script and styles, reducing page load times and improving performance.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'remove_translations',
             __('Remove Translations', 'unclutterwp'),
-            __('Disables loading of translations, saving server resources if multilingual support is not needed.', 'unclutterwp')
+            __('Disables loading of translations, saving server resources if multilingual support is not needed.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'remove_wptexturize',
             __('Remove wptexturize', 'unclutterwp'),
-            __('Disables the wptexturize functionality, which automatically formats certain characters, improving performance.', 'unclutterwp')
+            __('Disables the wptexturize functionality, which automatically formats certain characters, improving performance.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'disable_embeds',
             __('Disable Embeds', 'unclutterwp'),
-            __('Disables oEmbed functionality, reducing potential security risks and improving page load times.', 'unclutterwp')
+            __('Disables oEmbed functionality, reducing potential security risks and improving page load times.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'remove_gutenberg_styles',
             __('Remove Gutenberg Styles', 'unclutterwp'),
-            __('Removes styles added by Gutenberg, reducing page load times if not using the block editor.', 'unclutterwp')
+            __('Removes styles added by Gutenberg, reducing page load times if not using the block editor.', 'unclutterwp'),
+            'frontend'
         );
         $this->add_checkbox_setting(
             'remove_xmlrpc',
             __('Remove XMLRPC', 'unclutterwp'),
-            __('Blocks access to the XML-RPC file, preventing potential security vulnerabilities and DDoS attacks.', 'unclutterwp')
+            __('Blocks access to the XML-RPC file, preventing potential security vulnerabilities and DDoS attacks.', 'unclutterwp'),
+            'frontend'
         );
 
+        // Add settings for Admin methods
+        $this->add_checkbox_setting(
+            'remove_wpcom_blog_widget',
+            __('WordPress Events & News', 'unclutterwp'),
+            __('Removes the "WordPress Events & News" widget from the dashboard.', 'unclutterwp'),
+            'admin',
+            'widget'
+        );
 
-        // Add more settings for other methods as needed
+        $this->add_checkbox_setting(
+            'remove_right_now_widget',
+            __('At a Galnce', 'unclutterwp'),
+            __('Removes the "At a Galnce" widget from the dashboard.', 'unclutterwp'),
+            'admin',
+            'widget'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_dashboard_widget_welcome',
+            __('Welcome', 'unclutterwp'),
+            __('Removes the "Welcome" widget from the dashboard.', 'unclutterwp'),
+            'admin',
+            'widget'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_dashboard_widget_quick_draft',
+            __('Quick Draft', 'unclutterwp'),
+            __('Removes the "Quick Draft" widget from the dashboard.', 'unclutterwp'),
+            'admin',
+            'widget'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_dashboard_widget_activity',
+            __('Activity', 'unclutterwp'),
+            __('Removes the "Activity" widget from the dashboard.', 'unclutterwp'),
+            'admin',
+            'widget'
+        );
+
+        /** Menus  */
+
+        $this->add_checkbox_setting(
+            'remove_menu_dashboard',
+            __('Dashboard Menu', 'unclutterwp'),
+            __('Removes the "Dashboard" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_posts',
+            __('Posts Menu', 'unclutterwp'),
+            __('Removes the "Posts" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_media',
+            __('Media Menu', 'unclutterwp'),
+            __('Removes the "Media" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_pages',
+            __('Pages Menu', 'unclutterwp'),
+            __('Removes the "Pages" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_comments',
+            __('Comments Menu', 'unclutterwp'),
+            __('Removes the "Comments" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_appearance',
+            __('Appearance Menu', 'unclutterwp'),
+            __('Removes the "Appearance" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_plugins',
+            __('Plugins Menu', 'unclutterwp'),
+            __('Removes the "Plugins" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_users',
+            __('Users Menu', 'unclutterwp'),
+            __('Removes the "Users" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_tools',
+            __('Tools Menu', 'unclutterwp'),
+            __('Removes the "Tools" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_menu_settings',
+            __('Settings Menu', 'unclutterwp'),
+            __('Removes the "Settings" menu item from the admin sidebar.', 'unclutterwp'),
+            'admin',
+            'menu'
+        );
+
+        $this->add_checkbox_setting(
+            'remove_update_notifications',
+            __('Update Notifications', 'unclutterwp'),
+            __('Hides notifications for WordPress core, theme, and plugin updates.', 'unclutterwp'),
+            'admin'
+        );
+
     }
 
-    private function add_checkbox_setting($id, $label, $description)
-    {
+    private function add_checkbox_setting($id, $label, $description, $tab, $section = 'general')
+    {   
         add_settings_field(
             $id,
             $label,
             array($this, 'render_checkbox_field'),
-            $this->options_page_slug,
-            'general_section',
+            $this->options_page_slug . '_' . $tab,
+            $section,
             array('id' => $id, 'label' => $label, 'description' => $description)
         );
     }
@@ -115,35 +257,99 @@ class UNCLT_Options
     {
 ?>
         <div class="wrap">
-            <h1>UnclutterWP Settings</h1>
+            <h1><?php _e('UnclutterWP Settings', 'unclutterwp'); ?></h1>
+            <h2 class="nav-tab-wrapper">
+                <a href="#frontend" class="nav-tab" id="frontend-tab"><?php _e('Frontend', 'unclutterwp'); ?></a>
+                <a href="#admin" class="nav-tab" id="admin-tab"><?php _e('Admin', 'unclutterwp'); ?></a>
+            </h2>
             <form method="post" action="options.php">
                 <?php
                 settings_fields($this->settings_group);
-                do_settings_sections($this->options_page_slug);
+                ?>
+                <div id="frontend" class="tab-content">
+                    <?php
+                    do_settings_sections($this->options_page_slug . '_frontend');
+                    ?>
+                </div>
+                <div id="admin" class="tab-content">
+                    <?php
+                    do_settings_sections($this->options_page_slug . '_admin');
+                    ?>
+                </div>
+                <?php
                 submit_button();
                 ?>
             </form>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var tabs = document.querySelectorAll('.nav-tab');
+                var contents = document.querySelectorAll('.tab-content');
+                var activeTab = localStorage.getItem('activeTab') || 'frontend';
+
+                document.querySelector('#' + activeTab).style.display = 'block';
+                document.querySelector('#' + activeTab + '-tab').classList.add('nav-tab-active');
+
+                tabs.forEach(function (tab) {
+                    tab.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        var target = this.getAttribute('href').substring(1);
+
+                        tabs.forEach(function (tab) {
+                            tab.classList.remove('nav-tab-active');
+                        });
+                        contents.forEach(function (content) {
+                            content.style.display = 'none';
+                        });
+
+                        document.querySelector('#' + target).style.display = 'block';
+                        this.classList.add('nav-tab-active');
+                        localStorage.setItem('activeTab', target);
+                    });
+                });
+            });
+        </script>
     <?php
     }
 
-    public function render_general_section()
+    public function render_frontend_section()
     {
         echo '<p>';
-        _e('Configure general settings to unclutter your WordPress site.', 'your-text-domain');
+        _e('Configure general settings to unclutter your WordPress site.', 'unclutterwp');
         echo '</p>';
     }
 
+    public function render_admin_general_section()
+    {
+        echo '<p>';
+        _e('Configure admin settings to unclutter your WordPress dashboard.', 'unclutterwp');
+        echo '</p>';
+    }
+    
+    public function render_admin_widget_section()
+    {
+        echo '<p>';
+        _e('Remove Dashboard Widgets you don\'t use.', 'unclutterwp');
+        echo '</p>';
+    }
+
+    public function render_admin_menu_section()
+    {
+        echo '<p>';
+        _e('Remove Dashboard Menu Items you don\'t use.', 'unclutterwp');
+        echo '</p>';
+    }
+    
     public function render_checkbox_field($args)
     {
         $value = get_option($this->prefix . 'settings', array());
         $checked = isset($value[$args['id']]) ? checked(1, $value[$args['id']], false) : '';
     ?>
         <label for="<?php echo esc_attr($args['id']); ?>">
-            <input type="checkbox" id="<?php echo esc_attr($args['id']); ?>" name="<?php echo esc_attr($this->prefix . 'settings'); ?>[<?php echo esc_attr($args['id']); ?>]" value="1" <?php echo $checked; ?>>
+            <input type="checkbox" id="<?php echo esc_attr($args['id']); ?>" name="<?php echo esc_attr($this->prefix . 'settings'); ?>[<?php echo esc_attr($args['id']); ?>]" value="1" <?php echo esc_attr($checked); ?>>
             <span class="description"><?php echo esc_html($args['description']); ?></span>
         </label>
-<?php
+    <?php
     }
 
     public function sanitize_settings($input)
@@ -154,6 +360,12 @@ class UNCLT_Options
         }
         return $sanitized_input;
     }
+
+    public function get_all_settings()
+    {
+        return get_option($this->prefix . 'settings', array());
+    }
 }
 
-new UNCLT_Options();
+global $UNCLT_Options;
+$UNCLT_Options = new UNCLT_Options();
