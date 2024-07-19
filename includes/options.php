@@ -18,6 +18,14 @@ class UNCLT_Options
     {
         add_action('admin_menu', array($this, 'add_options_page'));
         add_action('admin_init', array($this, 'register_settings'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+    }
+
+    public function enqueue_scripts($hook) {
+        if ($hook != 'settings_page_'.$this->options_page_slug) {
+            return;
+        }
+        wp_enqueue_script('unclutterwp-admin', plugin_dir_url(UnclutterWP\UNCLT_FILE) . 'includes/js/admin.js', array(), '1.0', true);
     }
 
     public function add_options_page()
@@ -225,14 +233,6 @@ class UNCLT_Options
         );
 
         $this->add_checkbox_setting(
-            'remove_menu_settings',
-            __('Settings Menu', 'unclutterwp'),
-            __('Removes the "Settings" menu item from the admin sidebar.', 'unclutterwp'),
-            'admin',
-            'menu'
-        );
-
-        $this->add_checkbox_setting(
             'remove_update_notifications',
             __('Update Notifications', 'unclutterwp'),
             __('Hides notifications for WordPress core, theme, and plugin updates.', 'unclutterwp'),
@@ -281,34 +281,6 @@ class UNCLT_Options
                 ?>
             </form>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var tabs = document.querySelectorAll('.nav-tab');
-                var contents = document.querySelectorAll('.tab-content');
-                var activeTab = localStorage.getItem('activeTab') || 'frontend';
-
-                document.querySelector('#' + activeTab).style.display = 'block';
-                document.querySelector('#' + activeTab + '-tab').classList.add('nav-tab-active');
-
-                tabs.forEach(function (tab) {
-                    tab.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        var target = this.getAttribute('href').substring(1);
-
-                        tabs.forEach(function (tab) {
-                            tab.classList.remove('nav-tab-active');
-                        });
-                        contents.forEach(function (content) {
-                            content.style.display = 'none';
-                        });
-
-                        document.querySelector('#' + target).style.display = 'block';
-                        this.classList.add('nav-tab-active');
-                        localStorage.setItem('activeTab', target);
-                    });
-                });
-            });
-        </script>
     <?php
     }
 

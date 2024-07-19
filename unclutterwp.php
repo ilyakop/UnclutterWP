@@ -13,6 +13,7 @@
 namespace UnclutterWP;
 
 const UNCLT_PREFIX = 'unclt_';
+const UNCLT_FILE = __FILE__;
 
 if (!defined('ABSPATH')) {
     exit;
