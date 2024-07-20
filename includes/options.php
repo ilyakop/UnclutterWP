@@ -257,10 +257,10 @@ class UNCLT_Options
     {
 ?>
         <div class="wrap">
-            <h1><?php _e('UnclutterWP Settings', 'unclutterwp'); ?></h1>
+            <h1><?php esc_html_e('UnclutterWP Settings', 'unclutterwp'); ?></h1>
             <h2 class="nav-tab-wrapper">
-                <a href="#frontend" class="nav-tab" id="frontend-tab"><?php _e('Frontend', 'unclutterwp'); ?></a>
-                <a href="#admin" class="nav-tab" id="admin-tab"><?php _e('Admin', 'unclutterwp'); ?></a>
+                <a href="#frontend" class="nav-tab" id="frontend-tab"><?php esc_html_e('Frontend', 'unclutterwp'); ?></a>
+                <a href="#admin" class="nav-tab" id="admin-tab"><?php esc_html_e('Admin', 'unclutterwp'); ?></a>
             </h2>
             <form method="post" action="options.php">
                 <?php
@@ -287,28 +287,28 @@ class UNCLT_Options
     public function render_frontend_section()
     {
         echo '<p>';
-        _e('Configure general settings to unclutter your WordPress site.', 'unclutterwp');
+        esc_html_e('Configure general settings to unclutter your WordPress site.', 'unclutterwp');
         echo '</p>';
     }
 
     public function render_admin_general_section()
     {
         echo '<p>';
-        _e('Configure admin settings to unclutter your WordPress dashboard.', 'unclutterwp');
+        esc_html_e('Configure admin settings to unclutter your WordPress dashboard.', 'unclutterwp');
         echo '</p>';
     }
     
     public function render_admin_widget_section()
     {
         echo '<p>';
-        _e('Remove Dashboard Widgets you don\'t use.', 'unclutterwp');
+        esc_html_e('Remove Dashboard Widgets you don\'t use.', 'unclutterwp');
         echo '</p>';
     }
 
     public function render_admin_menu_section()
     {
         echo '<p>';
-        _e('Remove Dashboard Menu Items you don\'t use.', 'unclutterwp');
+        esc_html_e('Remove Dashboard Menu Items you don\'t use.', 'unclutterwp');
         echo '</p>';
     }
     
