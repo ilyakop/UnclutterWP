@@ -1,13 +1,13 @@
 === UnclutterWP ===
 
 Contributors: illiaonline
-Tags: 
+Tags: 1.0
 Requires at least: 6.0
-Tested up to: 6.5.3
+Tested up to: 6.6
 Stable tag: 1.0
 License: GPLv2 or later
 
-UnclutterWP is a WordPress plugin designed to optimize your website's performance by OPTIONALLY removing unnecessary functionalities and elements. It provides an easy way to clean up your WordPress site and improve its speed and security.
+UnclutterWP is a WordPress plugin designed to optimize your website's performance by OPTIONALLY removing unnecessary functionalities and elements.
 
 == Description ==
 
