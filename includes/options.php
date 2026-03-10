@@ -83,7 +83,16 @@ class UNCLT_Options
 
     public function register_settings()
     {
-        register_setting($this->settings_group, $this->prefix . 'settings', array($this, 'sanitize_settings'));
+        register_setting(
+            $this->settings_group,
+            $this->prefix . 'settings',
+            array(
+                'type' => 'array',
+                'sanitize_callback' => array($this, 'sanitize_settings'),
+                'default' => array(),
+                'capability' => 'manage_options',
+            )
+        );
 
         // Core Web Vitals optimization sections.
         add_settings_section(
@@ -355,6 +364,7 @@ class UNCLT_Options
 
     public function render_options_page()
     {
+        $this->assert_settings_capability();
         ?>
         <div class="wrap unclt-admin-page">
             <h1><?php esc_html_e('UnclutterWP Optimization Settings', 'unclutterwp'); ?></h1>
@@ -378,6 +388,7 @@ class UNCLT_Options
 
     public function render_tools_page()
     {
+        $this->assert_settings_capability();
         ?>
         <div class="wrap unclt-admin-page">
             <h1><?php esc_html_e('UnclutterWP Tools', 'unclutterwp'); ?></h1>
@@ -467,6 +478,11 @@ class UNCLT_Options
 
     public function sanitize_settings($input)
     {
+        // Ensure settings cannot be changed by users without admin capability.
+        if (!current_user_can('manage_options')) {
+            return get_option($this->prefix . 'settings', array());
+        }
+
         $sanitized_input = get_option($this->prefix . 'settings', array());
 
         if (!is_array($sanitized_input)) {
@@ -495,6 +511,17 @@ class UNCLT_Options
     public function get_all_settings()
     {
         return get_option($this->prefix . 'settings', array());
+    }
+
+    private function assert_settings_capability()
+    {
+        if (!current_user_can('manage_options')) {
+            wp_die(
+                esc_html__('You do not have permission to access this page.', 'unclutterwp'),
+                esc_html__('Permission Denied', 'unclutterwp'),
+                array('response' => 403)
+            );
+        }
     }
 
     private function build_section_title($icon_class, $title)
