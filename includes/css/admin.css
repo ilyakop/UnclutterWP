@@ -1,0 +1,43 @@
+.unclt-admin-page h1 {
+    border-bottom: 1px solid #dcdcde;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+}
+
+.unclt-admin-page .nav-tab-wrapper {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dcdcde;
+}
+
+.unclt-admin-page h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e4e7;
+    font-size: 15px;
+}
+
+.unclt-admin-page h2 .dashicons {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    color: #3858e9;
+}
+
+.unclt-admin-page .tab-content .form-table {
+    margin-top: 8px;
+}
+
+.unclt-admin-page .form-table td label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.unclt-admin-page .description {
+    color: #50575e;
+}

@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     var tabs = document.querySelectorAll('.nav-tab');
     var contents = document.querySelectorAll('.tab-content');
-    var activeTab = localStorage.getItem('activeTab') || 'frontend';
+    var activeTab = localStorage.getItem('activeTab') || 'core-web-vitals';
+
+    if (!document.querySelector('#' + activeTab)) {
+        activeTab = 'core-web-vitals';
+    }
 
     tabs.forEach(function (tab) {
         tab.addEventListener('click', function (event) {
@@ -25,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         tab.style.display = 'none';
     });
 
-    document.querySelector('#' + activeTab).style.display = 'block';
-    document.querySelector('#' + activeTab + '-tab').classList.add('nav-tab-active');
+    if (document.querySelector('#' + activeTab)) {
+        document.querySelector('#' + activeTab).style.display = 'block';
+    }
+    if (document.querySelector('#' + activeTab + '-tab')) {
+        document.querySelector('#' + activeTab + '-tab').classList.add('nav-tab-active');
+    }
 });

@@ -1,44 +1,74 @@
-=== UnclutterWP ===
+=== UnclutterWP - Core Web Vitals & Performance Optimizer ===
 
 Contributors: illiaonline
-Tags: optimization, cleanup, bloat, speed, SEO
+Tags: core web vitals, pagespeed, performance optimization, faster wordpress, reduce cls, improve lcp
 Requires at least: 6.0
 Tested up to: 6.6
 Stable tag: 1.0
 License: GPLv2 or later
 
-Optimize your website's performance by OPTIONALLY removing unnecessary functionalities and elements, improve its speed and security.
+Improve Core Web Vitals by removing unnecessary WordPress frontend resources, reducing render-blocking overhead, and streamlining script behavior.
 
 == Description ==
 
-= Features =
+UnclutterWP is a Core Web Vitals and PageSpeed optimization plugin for WordPress.
 
-- **Clean Head**: Removes unnecessary elements from the `<head>` section of your website.
-- **Disable JSON API**: Prevents access to the JSON API, reducing potential security risks and server load.
-- **Disable REST API**: Completely disables the REST API, improving security and reducing unnecessary requests.
-- **Disable Trackbacks**: Removes trackback functionality, which is often considered obsolete and can be a target for spam.
-- **Disable Pingback**: Disables the XML-RPC pingback functionality, reducing the risk of DDoS attacks and improving security.
-- **Disable Emojis**: Removes the emoji script and styles, reducing page load times and improving performance.
-- **Remove Translations**: Disables loading of translations, saving server resources if multilingual support is not needed.
-- **Remove wptexturize**: Disables the wptexturize functionality, which automatically formats certain characters, improving performance.
-- **Disable Embeds**: Disables oEmbed functionality, reducing potential security risks and improving page load times.
-- **Remove Gutenberg Styles**: Removes styles added by Gutenberg, reducing page load times if not using the block editor.
-- **Remove XMLRPC**: Blocks access to the XML-RPC file, preventing potential security vulnerabilities and DDoS attacks.
+Its primary goal is to help site owners improve:
+- LCP (Largest Contentful Paint)
+- CLS (Cumulative Layout Shift)
+- INP (Interaction to Next Paint)
+
+It does this by giving you optional controls to remove unnecessary frontend bloat, disable legacy WordPress features, and reduce unneeded requests.
+
+== Features ==
+
+- Improve Core Web Vitals through optional frontend optimization controls
+- Reduce render-blocking scripts and styles
+- Remove unused WordPress assets and discovery links
+- Disable unnecessary frontend features
+- Reduce layout shift risk from non-essential scripts
+- Optimize script loading behavior by removing unneeded runtime features
+
+Existing feature controls include:
+- **Clean Head Metadata**: Removes unnecessary elements from the `<head>` output.
+- **Disable JSON API Links**: Removes JSON and oEmbed discovery output when not needed.
+- **Disable REST API**: Disables REST API functionality for sites that do not require it.
+- **Disable Trackbacks**: Disables legacy trackback behavior.
+- **Disable Pingback**: Disables pingback headers and XML-RPC pingback behavior.
+- **Disable Emojis**: Removes WordPress emoji scripts and styles.
+- **Remove Translations**: Disables translation loading where multilingual support is not required.
+- **Remove wptexturize**: Disables wptexturize processing.
+- **Disable Embeds**: Disables embed functionality and `wp-embed` scripts.
+- **Remove Gutenberg Styles**: Removes front-end block library styles.
+- **Remove XMLRPC Pingback Calls**: Blocks XML-RPC pingback calls.
+- **Admin Cleanup Tools**: Optional dashboard widget and admin menu cleanup controls.
 
 == Installation ==
-**Installation**
 
 1. Download the plugin zip file.
-1. Log in to your WordPress admin panel.
-1. Go to Plugins > Add New.
-1. Click on the "Upload Plugin" button, select the plugin zip file, and click "Install Now".
-1. Activate the plugin after installation.
-1. Navigate to the Settings > UnclutterWP.
+2. Log in to your WordPress admin panel.
+3. Go to Plugins > Add New.
+4. Click "Upload Plugin", select the zip file, and click "Install Now".
+5. Activate the plugin.
+6. Open `UnclutterWP Performance` in the admin menu.
 
 == Screenshots ==
 
-1. Settings Page
+1. Optimization Settings grouped by LCP, CLS, INP, and Advanced Optimization
+2. Tools page for optional admin cleanup controls
+
+== FAQ ==
+
+= How does this plugin improve Core Web Vitals? =
+It removes or disables optional WordPress frontend resources and legacy features that can add extra requests, CSS, or JavaScript overhead.
+
+= Will this break my site? =
+All controls are optional. Enable settings incrementally and test pages after each change, especially if your site depends on REST API, embeds, or XML-RPC integrations.
+
+= Can I still use the plugin for admin cleanup? =
+Yes. Existing dashboard widget and admin menu cleanup features are still available under the Tools page.
 
 == Changelog ==
 
-1.0 - Initial release
+= 1.0 =
+- Initial release

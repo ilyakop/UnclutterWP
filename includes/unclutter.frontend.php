@@ -62,6 +62,7 @@ class UNCLT_Frontend
 
     /**
      * Cleans unnecessary elements from the `<head>` section.
+     * This can reduce markup and discovery links that delay first render (LCP).
      *
      * @since 1.0.0
      */
@@ -83,6 +84,7 @@ class UNCLT_Frontend
 
     /**
      * Removes JSON API related links and functionalities.
+     * Fewer discovery links and endpoints can reduce non-essential front-end work (INP).
      *
      * @since 1.0.0
      */
@@ -117,6 +119,7 @@ class UNCLT_Frontend
 
     /**
      * Disables the REST API entirely.
+     * This lowers background endpoint activity where API access is not needed (INP).
      *
      * @since 1.0.0
      */
@@ -189,6 +192,7 @@ class UNCLT_Frontend
 
     /**
      * Disables emojis functionalities.
+     * Disabling WordPress emojis removes extra JS/CSS requests that can impact LCP.
      *
      * @since 1.0.0
      */
@@ -241,6 +245,7 @@ class UNCLT_Frontend
 
     /**
      * Disables embeds functionality. They use a LOT of resources.
+     * This prevents loading `wp-embed` on the front-end, reducing JS overhead (LCP/INP).
      *
      * @since 1.0.0
      */
@@ -270,6 +275,7 @@ class UNCLT_Frontend
 
     /**
      * Removes Gutenberg styles.
+     * Optional CSS cleanup that may reduce stylesheet size and improve LCP opportunities.
      *
      * @since 1.0.0
      */
