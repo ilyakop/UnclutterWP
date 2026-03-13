@@ -1,6 +1,6 @@
 === UnclutterWP - Core Web Vitals & Performance Optimizer ===
 
-Contributors: illiaonline
+Contributors: unclutterwp
 Tags: core web vitals, pagespeed, performance optimization, faster wordpress, reduce cls, improve lcp
 Requires at least: 6.0
 Tested up to: 6.6

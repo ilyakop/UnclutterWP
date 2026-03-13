@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: UnclutterWP
- * Plugin URI: https://github.com/ilyakop/UnclutterWP
+ * Plugin URI: https://unclutterwp.com
  * Description: Improve Core Web Vitals by removing WordPress frontend bloat, optimizing assets, and controlling scripts that slow down your site.
- * Version: 1.0
- * Author: Illia Online
- * Author URI: https://illia.online
+ * Version: 1.0.1
+ * Author: UnclutterWP
+ * Author URI: https://unclutterwp.com
  * License: GPLv2 or later
  */
 
