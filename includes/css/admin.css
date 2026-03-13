@@ -10,26 +10,62 @@
     border-bottom: 1px solid #dcdcde;
 }
 
-.unclt-admin-page h2 {
-    display: flex;
+.unclt-admin-page .nav-tab {
+    display: inline-flex;
+    align-items: center;
+}
+
+.unclt-tab-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.unclt-tab-label .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    color: #2271b1;
+}
+
+.unclt-admin-page .tab-content {
+    margin-top: 12px;
+}
+
+.unclt-settings-section {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 0 0 16px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.unclt-section-title {
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 24px;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e2e4e7;
+    margin: 0 0 8px;
     font-size: 15px;
 }
 
-.unclt-admin-page h2 .dashicons {
+.unclt-section-title .dashicons {
     width: 18px;
     height: 18px;
     font-size: 18px;
-    color: #3858e9;
+    color: #2271b1;
 }
 
-.unclt-admin-page .tab-content .form-table {
-    margin-top: 8px;
+.unclt-settings-section .form-table {
+    margin-top: 10px;
+}
+
+.unclt-settings-section .form-table th {
+    padding-top: 16px;
+}
+
+.unclt-settings-section .form-table td {
+    padding-top: 13px;
 }
 
 .unclt-admin-page .form-table td label {

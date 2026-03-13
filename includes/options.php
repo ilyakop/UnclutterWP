@@ -369,16 +369,26 @@ class UNCLT_Options
         <div class="wrap unclt-admin-page">
             <h1><?php esc_html_e('UnclutterWP Optimization Settings', 'unclutterwp'); ?></h1>
             <h2 class="nav-tab-wrapper">
-                <a href="#core-web-vitals" class="nav-tab" id="core-web-vitals-tab"><?php esc_html_e('Core Web Vitals Optimization', 'unclutterwp'); ?></a>
-                <a href="#advanced-optimization" class="nav-tab" id="advanced-optimization-tab"><?php esc_html_e('Advanced Optimization', 'unclutterwp'); ?></a>
+                <a href="#core-web-vitals" class="nav-tab" id="core-web-vitals-tab">
+                    <span class="unclt-tab-label">
+                        <span class="dashicons dashicons-performance" aria-hidden="true"></span>
+                        <span><?php esc_html_e('Core Web Vitals Optimization', 'unclutterwp'); ?></span>
+                    </span>
+                </a>
+                <a href="#advanced-optimization" class="nav-tab" id="advanced-optimization-tab">
+                    <span class="unclt-tab-label">
+                        <span class="dashicons dashicons-admin-tools" aria-hidden="true"></span>
+                        <span><?php esc_html_e('Advanced Optimization', 'unclutterwp'); ?></span>
+                    </span>
+                </a>
             </h2>
             <form method="post" action="options.php">
                 <?php settings_fields($this->settings_group); ?>
                 <div id="core-web-vitals" class="tab-content">
-                    <?php do_settings_sections($this->options_page_slug . '_cwv'); ?>
+                    <?php $this->render_settings_sections($this->options_page_slug . '_cwv'); ?>
                 </div>
                 <div id="advanced-optimization" class="tab-content">
-                    <?php do_settings_sections($this->options_page_slug . '_advanced'); ?>
+                    <?php $this->render_settings_sections($this->options_page_slug . '_advanced'); ?>
                 </div>
                 <?php submit_button(); ?>
             </form>
@@ -396,7 +406,7 @@ class UNCLT_Options
             <form method="post" action="options.php">
                 <?php
                 settings_fields($this->settings_group);
-                do_settings_sections($this->tools_page_slug);
+                $this->render_settings_sections($this->tools_page_slug);
                 submit_button();
                 ?>
             </form>
@@ -531,6 +541,36 @@ class UNCLT_Options
             esc_attr($icon_class),
             esc_html($title)
         );
+    }
+
+    private function render_settings_sections($page)
+    {
+        global $wp_settings_sections, $wp_settings_fields;
+
+        if (empty($wp_settings_sections[$page])) {
+            return;
+        }
+
+        foreach ((array) $wp_settings_sections[$page] as $section) {
+            $section_id = isset($section['id']) ? sanitize_html_class($section['id']) : 'section';
+            echo '<div class="unclt-settings-section unclt-settings-section--' . esc_attr($section_id) . '">';
+
+            if (!empty($section['title'])) {
+                echo '<h2 class="unclt-section-title">' . wp_kses_post($section['title']) . '</h2>';
+            }
+
+            if (!empty($section['callback'])) {
+                call_user_func($section['callback'], $section);
+            }
+
+            if (!empty($wp_settings_fields[$page][$section['id']])) {
+                echo '<table class="form-table" role="presentation">';
+                do_settings_fields($page, $section['id']);
+                echo '</table>';
+            }
+
+            echo '</div>';
+        }
     }
 }
 
