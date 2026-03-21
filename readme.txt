@@ -3,8 +3,8 @@
 Contributors: unclutterwp
 Tags: core web vitals, pagespeed, performance optimization, faster wordpress, reduce cls, improve lcp
 Requires at least: 6.0
-Tested up to: 6.6
-Stable tag: 1.0
+Tested up to: 6.9
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Improve Core Web Vitals by removing unnecessary WordPress frontend resources, reducing render-blocking overhead, and streamlining script behavior.
